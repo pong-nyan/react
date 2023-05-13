@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 
 app.post("/signup", async (req, res) => {
   const { userId, password } = req.body;
-  
+
   const user = new User();
 
   const userRepository = AppDataSource.getRepository(User);
@@ -40,22 +40,24 @@ app.post("/signup", async (req, res) => {
   return res.send("signup success");
 });
 
-app.get("/login", async (req, res) => {
+app.post("/login", async (req, res) => {
   const { userId, password } = req.body;
 
   const userRepository: any = AppDataSource.getRepository(User);
-  const user = await userRepository.findOne({ userID: userId });
+  const user = await userRepository.findOne({ where: { userID: userId } });
 
+  console.log(user);
   if (!user) {
-    return res.send("user not found");
+    return res.status(401).send("user not found");
   }
-
   const isMatch = await bcrypt.compare(password, user.password);
 
+  console.log(password + '\n', user.password);
+
   if (!isMatch) {
-    return res.send("password not match");
+    return res.status(401).send("password not match");
   }
 
-  return res.send("login success");
+  return res.status(200).send("login success");
 }
 );
