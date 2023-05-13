@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import { User } from "./entity/User";
+import { AppDataSource } from "./data-source";
 import bodyParser from "body-parser";
 
 const app = express();
@@ -24,3 +26,9 @@ app.post('/login', (req, res) => {
 		res.status(401).send();
 	}
 });
+
+AppDataSource.initialize()
+    .then(() => {
+		console.log("Database connected");
+    })
+    .catch((error) => console.log(error))
