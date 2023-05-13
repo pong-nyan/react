@@ -1,0 +1,21 @@
+.login-container {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 화면 전체 높이만큼의 높이를 가진 요소 */
+    margin-top: 20%;
+}
+
+.input-login {
+    margin-top: 0.42rem;
+    height: 1.5rem;
+}
+
+.input-password {
+    margin-top: 0.42rem;
+    height: 1.5rem;
+}
+
+.login {
+    margin-top: 0.42rem;
+}
